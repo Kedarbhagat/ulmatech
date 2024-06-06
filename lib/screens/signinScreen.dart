@@ -8,7 +8,7 @@ import 'package:ulmatech/screens/signupScreen.dart';
 import 'package:ulmatech/widgets/text_Field.dart';
 import 'package:ulmatech/resources/auth.dart';
 
-String credUID = ' ';
+String credUID = '';
 bool _isLoading = false;
 
 class SigninScreen extends StatefulWidget {
@@ -21,6 +21,7 @@ class SigninScreen extends StatefulWidget {
 class _SigninScreenState extends State<SigninScreen> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+
   bool hidePassword = true;
   String error = ' ';
   late StreamSubscription<InternetConnectionStatus> connectionSubscription;
@@ -181,6 +182,7 @@ class _SigninScreenState extends State<SigninScreen> {
                       email: _emailController.text.toString(),
                       password: _passwordController.text.toString(),
                     );
+                    credUID =FirebaseAuth.instance.currentUser!.uid;
 
                     setState(() {
                       error = signInError; // Set the error message received from sign-in

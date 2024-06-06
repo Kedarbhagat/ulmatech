@@ -38,7 +38,6 @@ class listFormer {
 
 
     } ;
-  print(medicineMap) ;
 
  return medicineMap ;
 

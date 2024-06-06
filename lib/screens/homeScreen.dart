@@ -9,6 +9,7 @@ import '../resources/FirebaseCRUD.dart';
 import '../resources/auth.dart';
 import 'addMedecine.dart';
 // Define a list of predefined colors
+
 List<Color> _randomColors = [
   const Color(0xFFf8cff1),
   const Color(0xFFC2B6FF),
@@ -25,7 +26,9 @@ Color _getRandomColor() {
   return _randomColors[random.nextInt(_randomColors.length)];
 }
 Future<List<Map<String, String>>> getListData() async {
+  print("from function user id is "+credUID) ;
   List<Map<String, String>> fetchedMedicines = await Crud().getUserMedicines(credUID);
+  print(fetchedMedicines.toString())  ;
   return fetchedMedicines;
 }
 
@@ -64,6 +67,7 @@ class _homeScreenState extends State<homeScreen> {
   void refreshMedicines() {
     setState(() {
       userMedicinesFuture = getListData();
+
     });
   }
 
@@ -98,9 +102,10 @@ class _homeScreenState extends State<homeScreen> {
                       MaterialPageRoute(builder: (context) => const SigninScreen()),
                           (Route<dynamic> route) => false,
                     );
+
                   },
                   child: const CircleAvatar(
-                    backgroundImage: NetworkImage('https://th.bing.com/th?id=OIP.hNXsq5wSiRZECbJ6XPl75AHaHa&w=250&h=250&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2')
+                      backgroundImage: NetworkImage('https://th.bing.com/th?id=OIP.hNXsq5wSiRZECbJ6XPl75AHaHa&w=250&h=250&c=8&rs=1&qlt=90&o=6&dpr=1.3&pid=3.1&rm=2')
                   ),
                 ),
               ],
@@ -130,15 +135,22 @@ class _homeScreenState extends State<homeScreen> {
             FutureBuilder<List<Map<String, String>>>(
               future: userMedicinesFuture,
               builder: (context, snapshot) {
+
+                print('from future build'+userMedicinesFuture.toString()) ;
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return  Center(child: Container(
-                    height: 400,
-                      child: CircularProgressIndicator()));
+                      height: 400,
+                      child: Center(
+                        child: SizedBox(
+                          height: 40,
+                            width: 40,
+                            child: CircularProgressIndicator()),
+                      )));
                 } else if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
                 } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                   return Container(
-                    height: 400,
+                      height: 400,
                       child: Image.asset('assets/nothing.png'));
                 } else {
                   return Container(
@@ -182,10 +194,10 @@ class _homeScreenState extends State<homeScreen> {
                                       Text('Food Status: ${medicine['medicineFoodStatus']}'),
                                     ],
                                   ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                const Icon(Icons.notifications_none_outlined , color: Colors.green,)
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  const Icon(Icons.notifications_none_outlined , color: Colors.green,)
                                 ],
                               ),
                             ),
@@ -215,6 +227,7 @@ class _homeScreenState extends State<homeScreen> {
                       const Expanded(child: Divider(height: 8, color: Color(0xFF6f8bef))),
                       GestureDetector(
                         onTap: () async {
+                      await    getListData() ;
                           final result = await Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => const AddMedecine()),

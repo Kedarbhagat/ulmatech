@@ -643,7 +643,6 @@ class _AddMedecineState extends State<AddMedecine> {
                     _isLoading = true; // Set loading state to true
                   });
 
-                  print(selectedFoodStatus);
 
                   // Perform the asynchronous operation
                   await listFormer().addMedicine(
@@ -656,7 +655,7 @@ class _AddMedecineState extends State<AddMedecine> {
                     medicineTimesDay: int.parse(_timesPerDayController.text),
                     medicineFoodStatus: selectedFoodStatus,
                   );
-
+                  print("This is from add fuctions") ;
                   await getListData();
 
                   Navigator.pop(context, true);

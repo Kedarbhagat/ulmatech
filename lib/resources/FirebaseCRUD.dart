@@ -7,26 +7,35 @@ class Crud {
 
 
   Future<List<Map<String, String>>> getUserMedicines(String userID) async {
-    await Firebase.initializeApp();
-
-    DocumentSnapshot userDoc = await _db.collection('users').doc(userID).get();
-    if (userDoc.exists) {
-      var userData = userDoc.data();
-      if (userData != null && userData is Map<String, dynamic> && userData['medicines'] != null) {
-        // Convert each entry in the list to Map<String, String>
-        List<Map<String, String>> userMedicines = [];
-        for (var entry in userData['medicines']) {
-          Map<String, String> convertedEntry = {};
-          entry.forEach((key, value) {
-            convertedEntry[key] = value.toString();
-          });
-          userMedicines.add(convertedEntry);
+    List<Map<String, String>> userMedicines = [];
+    print("hello 1") ;
+    try
+    {
+      DocumentSnapshot userDoc = await _db.collection('users').doc(userID).get();
+      if (userDoc.exists) {
+        print("hello 2") ;
+        var userData = userDoc.data();
+        if (userData != null && userData is Map<String, dynamic> && userData['medicines'] != null) {
+          // Convert each entry in the list to Map<String, String>
+          print("hello 3") ;
+          for (var entry in userData['medicines']) {
+            Map<String, String> convertedEntry = {};
+            entry.forEach((key, value) {
+              convertedEntry[key] = value.toString();
+            });
+            print("this is converted list"+convertedEntry.toString()) ;
+            userMedicines.add(convertedEntry);
+          }
+          return userMedicines;
         }
-        return userMedicines;
       }
+      return [];
+    } catch (e) {
+      print("Error fetching user medicines: $e");
+      return []; // Return empty list on error
     }
-    return [];
   }
+
 
 
 
