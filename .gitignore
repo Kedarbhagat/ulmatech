@@ -1,0 +1,72 @@
+# Flutter specific
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+build/
+flutter_export_environment.bat
+
+# VS Code settings
+.vscode/
+# IntelliJ / Android Studio settings
+.idea/
+*.iml
+
+# Android specific
+android/.gradle/
+android/.idea/
+android/captures/
+android/local.properties
+android/app/release/
+android/app/debug/
+android/app/intermediates/
+android/app/build/
+android/app/.cxx/
+android/gradle/
+android/build/
+
+# iOS specific
+ios/Flutter/.last_build_id
+ios/.generated/
+ios/.symlinks/
+ios/Pods/
+ios/Runner.xcworkspace/
+ios/build/
+ios/Flutter/Flutter.framework/
+ios/Flutter/Flutter.podspec
+
+# Packages
+.pub-cache/
+.symlinks/
+pubspec.lock
+
+# Mac-specific
+.DS_Store
+
+# Windows-specific
+Thumbs.db
+
+# JetBrains IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
+out/
+
+# Generated files
+*.log
+*.lock
+*.pyc
+*.pyo
+*.swp
+*.class
+*.suo
+*.swp
+*.sln
+*.exe
+*.dll
+*.log
+
+# Other
+.macos/
+web/.dart_tool/
